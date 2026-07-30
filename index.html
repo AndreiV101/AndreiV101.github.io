@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Photo Journal</title>
+  <meta name="description" content="Stories and pictures from the field">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+  <header class="hero">
+    <div class='hero-media'><img src='images/studio-light-sample.jpg' alt='Studio light'></div>
+    <div class="hero-copy">
+      <p class="brand">Photo Journal</p>
+      <h1>Stories and pictures from the field</h1>
+      <p class="support">Updated from a shared Google Sheet and Drive photos.</p>
+      <a class="cta" href="#gallery">Browse pictures</a>
+    </div>
+  </header>
+  
+    <section class="lede" aria-label="Featured">
+      <p>Work in progress on the long table.</p>
+    </section>
+  <main id="gallery" class="gallery">
+    <header class="gallery-head">
+      <h2>Gallery</h2>
+      <p>Content from the spreadsheet. Pictures resized from Google Drive.</p>
+    </header>
+    <div class="shots">
+      
+      <figure class="shot">
+        <img src="images/morning-market-sample.jpg" alt="Morning market" loading="lazy" width="1400" height="933">
+        <figcaption>
+          <h2>Morning market</h2>
+          <p>Vendors setting up before sunrise. Tomatoes stacked in wooden crates.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="shot">
+        <img src="images/river-walk-sample.jpg" alt="River walk" loading="lazy" width="1400" height="933">
+        <figcaption>
+          <h2>River walk</h2>
+          <p>Fog lifting off the water after rain.</p>
+        </figcaption>
+      </figure>
+    </div>
+  </main>
+  <footer class="foot">
+    <p>Built 2026-07-30 22:50 UTC · Re-run the GitHub Action after Sheet or Drive updates</p>
+  </footer>
+  <script src="assets/site.js"></script>
+</body>
+</html>

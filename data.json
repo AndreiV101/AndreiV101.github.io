@@ -1,0 +1,28 @@
+{
+  "built_at": "2026-07-30 22:50 UTC",
+  "site_title": "Photo Journal",
+  "site_tagline": "Stories and pictures from the field",
+  "image_max_width": 1400,
+  "image_quality": 82,
+  "count": 3,
+  "items": [
+    {
+      "title": "Morning market",
+      "description": "Vendors setting up before sunrise. Tomatoes stacked in wooden crates.",
+      "section": "gallery",
+      "image_src": "images/morning-market-sample.jpg"
+    },
+    {
+      "title": "River walk",
+      "description": "Fog lifting off the water after rain.",
+      "section": "gallery",
+      "image_src": "images/river-walk-sample.jpg"
+    },
+    {
+      "title": "Studio light",
+      "description": "Work in progress on the long table.",
+      "section": "featured",
+      "image_src": "images/studio-light-sample.jpg"
+    }
+  ]
+}
