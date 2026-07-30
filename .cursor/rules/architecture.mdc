@@ -1,0 +1,27 @@
+---
+description: Read architecture, Sheet button trigger, and spreadsheet contract
+globs:
+alwaysApply: true
+---
+
+Before planning or editing this repo (or a fork/template copy), read `ARCHITECTURE.md` and `GOOGLE_SHEETS_SETUP.md`.
+
+It defines:
+
+- **Public template:** this repo is public; its GitHub owner does not matter. Users copy it into their own host.
+- **Pages host name required:** live site must be **`owner.github.io`** (not project Pages). CI hard-fails otherwise.
+- **Template → hosting repo:** copy into `owner.github.io`. That repo is the website host (build + Pages). No intermediate content repo.
+- **Primary publish:** Sheet Apps Script → `repository_dispatch` (`rebuild-site`) → build `site/` → publish to **`main` repo root** → Pages from **`main` / `/`**
+- **One PAT only:** `GH_PAT` = **hosting repo owner** fine-grained token, **`owner.github.io` only**, Actions R/W. **Never `DEPLOY_TOKEN`.** (Unrelated to the public template’s owner.)
+- CI enforces naming (`owner.github.io`) and Pages (`main` + `/`) via `scripts/check_host_repo.py`
+- Spreadsheet schema + `your website content` tab; dispatch may send inline CSV
+- **Settings tab** (`settings`): `site_title`, `site_tagline`, `image_max_width`, `image_quality` — no `config.json`
+- **Minimal hosting repo:** non-technical owners use Sheet + Drive only; contributors handle design in `owner.github.io`
+- Env / dispatch payload for spreadsheet id + optional overrides (not required day-to-day)
+- Generated `site/` is gitignored; published files live at repo root
+
+Script source: `google-apps-script/Code.gs` (copied into the sheet’s Apps Script project).
+
+Do not invent alternate sheet schemas, private Google API auth for reads, cron-as-primary-publish, a second destination repo, or `DEPLOY_TOKEN` unless the user asks.
+Never tell users to commit PATs into the repo or to use Codespaces secrets for Actions.
+Keep `repository_dispatch` event type in sync with Apps Script (`rebuild-site` / `GH_EVENT_TYPE`).

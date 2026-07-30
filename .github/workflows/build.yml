@@ -1,0 +1,100 @@
+name: Build site from Google Drive + Sheets
+
+# Primary trigger: Google Sheets button → Apps Script → repository_dispatch
+# (see GOOGLE_SHEETS_SETUP.md). Manual workflow_dispatch remains as backup.
+# This workflow runs in the web hosting repo (owner.github.io) after the template is copied in.
+on:
+  repository_dispatch:
+    types: [rebuild-site]
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - "sample/**"
+      - ".github/workflows/build.yml"
+      - "requirements.txt"
+      - "google-apps-script/**"
+
+permissions:
+  contents: write
+  pages: read
+
+concurrency:
+  group: build-site
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check hosting repo name + Pages (main / root)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/check_host_repo.py
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Decode sheet CSV from dispatch payload
+        if: github.event_name == 'repository_dispatch' && github.event.client_payload.sheet_csv_b64
+        env:
+          SHEET_CSV_B64: ${{ github.event.client_payload.sheet_csv_b64 }}
+        run: |
+          python3 -c "
+          import base64, os
+          from pathlib import Path
+          path = Path(os.environ['RUNNER_TEMP']) / 'dispatch-sheet.csv'
+          path.write_bytes(base64.b64decode(os.environ['SHEET_CSV_B64']))
+          print(f'SHEET_CSV_PATH={path}')
+          " >> "$GITHUB_ENV"
+
+      - name: Build static site
+        env:
+          # Sheet publish sends spreadsheet_id / sheet_gid / settings / optional inline CSV.
+          SPREADSHEET_ID: ${{ github.event.client_payload.spreadsheet_id || vars.SPREADSHEET_ID || secrets.SPREADSHEET_ID }}
+          SPREADSHEET_URL: ${{ vars.SPREADSHEET_URL || secrets.SPREADSHEET_URL }}
+          SHEET_GID: ${{ github.event.client_payload.sheet_gid || vars.SHEET_GID || '0' }}
+          SETTINGS_GID: ${{ github.event.client_payload.settings_gid || vars.SETTINGS_GID }}
+          SETTINGS_JSON: ${{ github.event.client_payload.settings_json }}
+          SHEET_CSV_PATH: ${{ env.SHEET_CSV_PATH }}
+          # Optional Actions overrides (Settings tab is the normal source)
+          SITE_TITLE: ${{ vars.SITE_TITLE }}
+          SITE_TAGLINE: ${{ vars.SITE_TAGLINE }}
+          IMAGE_MAX_WIDTH: ${{ vars.IMAGE_MAX_WIDTH }}
+          IMAGE_QUALITY: ${{ vars.IMAGE_QUALITY }}
+        run: python scripts/build.py
+
+      - name: Publish site/ to repo root (Pages from main)
+        run: |
+          set -euo pipefail
+          test -f site/index.html
+          mkdir -p assets images
+          rsync -a --delete site/assets/ assets/
+          rsync -a --delete site/images/ images/
+          cp -f site/index.html index.html
+          cp -f site/data.json data.json
+          touch .nojekyll
+
+      - name: Commit published site on main
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html data.json assets images .nojekyll
+          git add -u assets images 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No published site changes"
+          else
+            git commit -m "chore: publish site from Sheet + Drive"
+            git push
+          fi
