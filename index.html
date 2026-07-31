@@ -18,13 +18,41 @@
     </nav>
   </header>
   
+  <section class="hero-banner" aria-label="Featured artwork">
+    <div class="hero-banner__media">
+      <img src="images/studio-light-sample.jpg" alt="Studio light">
+    </div>
+    <div class="hero-banner__copy">
+      <h1>Stories and pictures from the field</h1>
+      <p class='hero-banner__caption'>Studio light</p>
+    </div>
+  </section>
   
   <section class="intro" aria-label="Introduction">
-    <p>Thick strokes of cadmium and violet catching the last light on the canyon rim.</p>
+    <p>Work in progress on the long table.</p>
   </section>
   <main id="gallery" class="portfolio">
     <div class="portfolio__grid">
-      <p class="portfolio__empty">No gallery items yet.</p>
+      
+      <article class="artwork">
+        <button type="button" class="artwork__thumb" data-lightbox="images/morning-market-sample.jpg" data-caption="Morning market" aria-label="View Morning market">
+          <img src="images/morning-market-sample.jpg" alt="Morning market" loading="lazy" width="1400" height="933">
+        </button>
+        <div class="artwork__meta">
+          <h2>Morning market</h2>
+          <p>Vendors setting up before sunrise. Tomatoes stacked in wooden crates.</p>
+        </div>
+      </article>
+
+      <article class="artwork">
+        <button type="button" class="artwork__thumb" data-lightbox="images/river-walk-sample.jpg" data-caption="River walk" aria-label="View River walk">
+          <img src="images/river-walk-sample.jpg" alt="River walk" loading="lazy" width="1400" height="933">
+        </button>
+        <div class="artwork__meta">
+          <h2>River walk</h2>
+          <p>Fog lifting off the water after rain.</p>
+        </div>
+      </article>
     </div>
   </main>
   <footer class="site-footer">
