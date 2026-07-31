@@ -4,25 +4,49 @@
   "site_tagline": "Stories and pictures from the field",
   "image_max_width": 1400,
   "image_quality": 82,
-  "count": 3,
+  "count": 7,
   "items": [
     {
-      "title": "Morning market",
+      "title": "Golden Hour Cliffs",
+      "description": "Thick strokes of cadmium and violet catching the last light on the canyon rim.",
+      "section": "featured",
+      "image_src": ""
+    },
+    {
+      "title": "Morning Market",
       "description": "Vendors setting up before sunrise. Tomatoes stacked in wooden crates.",
       "section": "gallery",
-      "image_src": "images/morning-market-sample.jpg"
+      "image_src": ""
     },
     {
-      "title": "River walk",
-      "description": "Fog lifting off the water after rain.",
+      "title": "River Walk",
+      "description": "Fog lifting off the water after rain, willows leaning into the current.",
       "section": "gallery",
-      "image_src": "images/river-walk-sample.jpg"
+      "image_src": ""
     },
     {
-      "title": "Studio light",
-      "description": "Work in progress on the long table.",
-      "section": "featured",
-      "image_src": "images/studio-light-sample.jpg"
+      "title": "Studio Light",
+      "description": "Work in progress on the long table \u2014 five pigments, clean strokes, right the first time.",
+      "section": "gallery",
+      "image_src": ""
+    },
+    {
+      "title": "Wine Country Hills",
+      "description": "Rolling vineyards in late summer, oak shadows cutting across the rows.",
+      "section": "gallery",
+      "image_src": ""
+    },
+    {
+      "title": "Desert Bloom",
+      "description": "Unexpected color after spring rain \u2014 sage, sand, and sudden wildflowers.",
+      "section": "gallery",
+      "image_src": ""
+    },
+    {
+      "title": "Harbor Dusk",
+      "description": "Boats at rest while the sky turns from coral to indigo.",
+      "section": "gallery",
+      "image_src": ""
     }
   ]
 }
