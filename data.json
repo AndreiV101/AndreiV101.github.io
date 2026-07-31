@@ -1,28 +1,52 @@
 {
-  "built_at": "2026-07-31 01:55 UTC",
+  "built_at": "2026-07-31 02:00 UTC",
   "site_title": "Photo Journal",
   "site_tagline": "Stories and pictures from the field",
   "image_max_width": 1400,
   "image_quality": 82,
-  "count": 3,
+  "count": 7,
   "items": [
     {
-      "title": "Morning market",
+      "title": "Golden Hour Cliffs",
+      "description": "Thick strokes of cadmium and violet catching the last light on the canyon rim.",
+      "section": "featured",
+      "image_src": "images/golden-hour-cliffs-fa16d58a.jpg"
+    },
+    {
+      "title": "Morning Market",
       "description": "Vendors setting up before sunrise. Tomatoes stacked in wooden crates.",
       "section": "gallery",
-      "image_src": "images/morning-market-sample.jpg"
+      "image_src": "images/morning-market-bc74fd82.jpg"
     },
     {
-      "title": "River walk",
-      "description": "Fog lifting off the water after rain.",
+      "title": "River Walk",
+      "description": "Fog lifting off the water after rain, willows leaning into the current.",
       "section": "gallery",
-      "image_src": "images/river-walk-sample.jpg"
+      "image_src": "images/river-walk-2875dad0.jpg"
     },
     {
-      "title": "Studio light",
-      "description": "Work in progress on the long table.",
-      "section": "featured",
-      "image_src": "images/studio-light-sample.jpg"
+      "title": "Studio Light",
+      "description": "Work in progress on the long table \u2014 five pigments, clean strokes, right the first time.",
+      "section": "gallery",
+      "image_src": "images/studio-light-fa16d58a.jpg"
+    },
+    {
+      "title": "Wine Country Hills",
+      "description": "Rolling vineyards in late summer, oak shadows cutting across the rows.",
+      "section": "gallery",
+      "image_src": "images/wine-country-hills-bc74fd82.jpg"
+    },
+    {
+      "title": "Desert Bloom",
+      "description": "Unexpected color after spring rain \u2014 sage, sand, and sudden wildflowers.",
+      "section": "gallery",
+      "image_src": "images/desert-bloom-2875dad0.jpg"
+    },
+    {
+      "title": "Harbor Dusk",
+      "description": "Boats at rest while the sky turns from coral to indigo.",
+      "section": "gallery",
+      "image_src": ""
     }
   ]
 }
