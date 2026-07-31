@@ -7,50 +7,64 @@
   <meta name="description" content="Stories and pictures from the field">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-  <header class="hero">
-    <div class='hero-media'><img src='images/studio-light-sample.jpg' alt='Studio light'></div>
-    <div class="hero-copy">
-      <p class="brand">Photo Journal</p>
-      <h1>Stories and pictures from the field</h1>
-      <p class="support">Updated from a shared Google Sheet and Drive photos.</p>
-      <a class="cta" href="#gallery">Browse pictures</a>
-    </div>
+  <header class="site-header">
+    <a class="site-header__brand" href="#">Photo Journal</a>
+    <nav class="site-header__nav">
+      <a href="#gallery">Gallery</a>
+    </nav>
   </header>
   
-    <section class="lede" aria-label="Featured">
-      <p>Work in progress on the long table.</p>
-    </section>
-  <main id="gallery" class="gallery">
-    <header class="gallery-head">
-      <h2>Gallery</h2>
-      <p>Content from the spreadsheet. Pictures resized from Google Drive.</p>
-    </header>
-    <div class="shots">
+  <section class="hero-banner" aria-label="Featured artwork">
+    <div class="hero-banner__media">
+      <img src="images/studio-light-sample.jpg" alt="Studio light">
+    </div>
+    <div class="hero-banner__copy">
+      <h1>Stories and pictures from the field</h1>
+      <p class='hero-banner__caption'>Studio light</p>
+    </div>
+  </section>
+  
+  <section class="intro" aria-label="Introduction">
+    <p>Work in progress on the long table.</p>
+  </section>
+  <main id="gallery" class="portfolio">
+    <div class="portfolio__grid">
       
-      <figure class="shot">
-        <img src="images/morning-market-sample.jpg" alt="Morning market" loading="lazy" width="1400" height="933">
-        <figcaption>
+      <article class="artwork">
+        <button type="button" class="artwork__thumb" data-lightbox="images/morning-market-sample.jpg" data-caption="Morning market" aria-label="View Morning market">
+          <img src="images/morning-market-sample.jpg" alt="Morning market" loading="lazy" width="1400" height="933">
+        </button>
+        <div class="artwork__meta">
           <h2>Morning market</h2>
           <p>Vendors setting up before sunrise. Tomatoes stacked in wooden crates.</p>
-        </figcaption>
-      </figure>
+        </div>
+      </article>
 
-      <figure class="shot">
-        <img src="images/river-walk-sample.jpg" alt="River walk" loading="lazy" width="1400" height="933">
-        <figcaption>
+      <article class="artwork">
+        <button type="button" class="artwork__thumb" data-lightbox="images/river-walk-sample.jpg" data-caption="River walk" aria-label="View River walk">
+          <img src="images/river-walk-sample.jpg" alt="River walk" loading="lazy" width="1400" height="933">
+        </button>
+        <div class="artwork__meta">
           <h2>River walk</h2>
           <p>Fog lifting off the water after rain.</p>
-        </figcaption>
-      </figure>
+        </div>
+      </article>
     </div>
   </main>
-  <footer class="foot">
-    <p>Built 2026-07-30 22:50 UTC · Re-run the GitHub Action after Sheet or Drive updates</p>
+  <footer class="site-footer">
+    <p>Photo Journal</p>
   </footer>
+  <div class="lightbox" id="lightbox" hidden aria-hidden="true">
+    <button type="button" class="lightbox__close" aria-label="Close">&times;</button>
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" src="" alt="">
+      <figcaption class="lightbox__caption"></figcaption>
+    </figure>
+  </div>
   <script src="assets/site.js"></script>
 </body>
 </html>
