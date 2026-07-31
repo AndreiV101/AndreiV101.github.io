@@ -44,6 +44,25 @@ SETTINGS_KEYS = (
     "image_quality",
 )
 
+# Matches Apps Script PICTURE_URL_HEADERS (normalized keys).
+IMAGE_FIELD_KEYS = (
+    "image",
+    "image_id",
+    "drive_id",
+    "photo",
+    "picture_urls",
+    "picture_url",
+    "image_url",
+)
+
+
+def image_field_from_row(row: dict) -> str:
+    for key in IMAGE_FIELD_KEYS:
+        val = row.get(key)
+        if val:
+            return str(val).strip()
+    return ""
+
 
 def load_config() -> dict:
     """Defaults + Settings tab / env. No config.json."""
@@ -780,13 +799,7 @@ def process_rows(cfg: dict, rows: list[dict]) -> list[dict]:
         title = row.get("title") or row.get("name") or f"Item {idx + 1}"
         description = row.get("description") or row.get("caption") or row.get("body") or ""
         section = (row.get("section") or "gallery").lower()
-        image_field = (
-            row.get("image")
-            or row.get("image_id")
-            or row.get("drive_id")
-            or row.get("photo")
-            or ""
-        )
+        image_field = image_field_from_row(row)
         file_id = extract_drive_id(image_field)
         image_src = ""
 
@@ -807,6 +820,11 @@ def process_rows(cfg: dict, rows: list[dict]) -> list[dict]:
         elif image_field.startswith("http"):
             # Non-Drive URL: keep remote reference
             image_src = image_field
+        elif image_field:
+            print(
+                f"  WARN no image for '{title}': unparseable Drive id/URL in image column",
+                file=sys.stderr,
+            )
 
         items.append(
             {

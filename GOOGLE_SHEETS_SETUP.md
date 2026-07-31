@@ -49,8 +49,10 @@ Google Sheets → Blank → rename (e.g. `My Site Content`)
 1. Rename the data tab to **`your website content`**
 2. Headers in row 1:
 
-| title | description | image | section | order | published |
-|-------|-------------|-------|---------|-------|-----------|
+| title | description | image (or **Picture URLs**) | section | order | published |
+|-------|-------------|-----------------------------|---------|-------|-----------|
+
+`Picture URLs` is written by **Import Picture URLs** in Apps Script; the builder treats it the same as `image`.
 
 ### A2b. Settings tab
 
@@ -75,7 +77,7 @@ Publish-from-sheet usually sends rows + settings inline — you do **not** need 
 
 ### A4. Drive pictures
 
-Files: **Anyone with the link → Viewer**. Put id/URL in `image`. Optional: sibling folder **`Pictures`** for **Import Picture URLs** (writes into the **`your website content`** tab, same as Publish).
+Files: **Anyone with the link → Viewer**. Put id/URL in `image` or **`Picture URLs`**. Optional: sibling folder **`Pictures`** for **Import Picture URLs** (writes into the **`your website content`** tab, same as Publish).
 
 ---
 
