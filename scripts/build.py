@@ -349,37 +349,52 @@ def render_html(cfg: dict, items: list[dict], built_at: str) -> str:
         featured = items[0]
     gallery = [i for i in items if i is not featured]
 
-    hero_img = ""
-    hero_caption = ""
+    hero_block = ""
     if featured and featured.get("image_src"):
-        hero_img = featured["image_src"]
-        hero_caption = html_escape(featured.get("title") or "")
+        hero_alt = html_escape(featured.get("title") or tagline)
+        hero_title = html_escape(featured.get("title") or "")
+        hero_block = f"""
+  <section class="hero-banner" aria-label="Featured artwork">
+    <div class="hero-banner__media">
+      <img src="{html_escape(featured['image_src'])}" alt="{hero_alt}">
+    </div>
+    <div class="hero-banner__copy">
+      <h1>{tagline}</h1>
+      {"<p class='hero-banner__caption'>" + hero_title + "</p>" if hero_title else ""}
+    </div>
+  </section>"""
+
+    intro_block = ""
+    if featured and featured.get("description"):
+        intro_block = f"""
+  <section class="intro" aria-label="Introduction">
+    <p>{html_escape(featured.get('description') or '')}</p>
+  </section>"""
 
     cards = []
     for item in gallery:
         if not item.get("image_src"):
             continue
+        item_title = html_escape(item.get("title") or "")
+        item_desc = html_escape(item.get("description") or "")
+        item_src = html_escape(item["image_src"])
+        desc_html = f"<p>{item_desc}</p>" if item_desc else ""
         cards.append(
             f"""
-      <figure class="shot">
-        <img src="{html_escape(item['image_src'])}" alt="{html_escape(item.get('title') or '')}" loading="lazy" width="1400" height="933">
-        <figcaption>
-          <h2>{html_escape(item.get('title') or '')}</h2>
-          <p>{html_escape(item.get('description') or '')}</p>
-        </figcaption>
-      </figure>"""
+      <article class="artwork">
+        <button type="button" class="artwork__thumb" data-lightbox="{item_src}" data-caption="{item_title}" aria-label="View {item_title}">
+          <img src="{item_src}" alt="{item_title}" loading="lazy" width="1400" height="933">
+        </button>
+        <div class="artwork__meta">
+          <h2>{item_title}</h2>
+          {desc_html}
+        </div>
+      </article>"""
         )
 
     gallery_html = "\n".join(cards) if cards else (
-        '<p class="empty">No gallery items yet. Add rows to the spreadsheet and re-run the Action.</p>'
+        '<p class="portfolio__empty">No gallery items yet.</p>'
     )
-
-    featured_block = ""
-    if featured and featured.get("image_src") and featured.get("description"):
-        featured_block = f"""
-    <section class="lede" aria-label="Featured">
-      <p>{html_escape(featured.get('description') or '')}</p>
-    </section>"""
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -390,53 +405,47 @@ def render_html(cfg: dict, items: list[dict], built_at: str) -> str:
   <meta name="description" content="{tagline}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-  <header class="hero">
-    {"<div class='hero-media'><img src='" + html_escape(hero_img) + "' alt='" + hero_caption + "'></div>" if hero_img else "<div class='hero-media hero-media--empty'></div>"}
-    <div class="hero-copy">
-      <p class="brand">{title}</p>
-      <h1>{tagline}</h1>
-      <p class="support">Updated from a shared Google Sheet and Drive photos.</p>
-      <a class="cta" href="#gallery">Browse pictures</a>
-    </div>
+  <header class="site-header">
+    <a class="site-header__brand" href="#">{title}</a>
+    <nav class="site-header__nav">
+      <a href="#gallery">Gallery</a>
+    </nav>
   </header>
-  {featured_block}
-  <main id="gallery" class="gallery">
-    <header class="gallery-head">
-      <h2>Gallery</h2>
-      <p>Content from the spreadsheet. Pictures resized from Google Drive.</p>
-    </header>
-    <div class="shots">
+  {hero_block}
+  {intro_block}
+  <main id="gallery" class="portfolio">
+    <div class="portfolio__grid">
       {gallery_html}
     </div>
   </main>
-  <footer class="foot">
-    <p>Built {html_escape(built_at)} · Re-run the GitHub Action after Sheet or Drive updates</p>
+  <footer class="site-footer">
+    <p>{title}</p>
   </footer>
+  <div class="lightbox" id="lightbox" hidden aria-hidden="true">
+    <button type="button" class="lightbox__close" aria-label="Close">&times;</button>
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" src="" alt="">
+      <figcaption class="lightbox__caption"></figcaption>
+    </figure>
+  </div>
   <script src="assets/site.js"></script>
 </body>
 </html>
 """
 
 
-def write_assets(out: Path) -> None:
-    assets = out / "assets"
-    assets.mkdir(parents=True, exist_ok=True)
-
-    (assets / "site.css").write_text(
-        """:root {
-  --ink: #14201b;
-  --moss: #1f3d32;
-  --mist: #d7e0d8;
-  --fog: #eef3ef;
-  --paper: #f7faf7;
-  --accent: #c45c26;
-  --shadow: rgba(20, 32, 27, 0.35);
-  --display: "Fraunces", Georgia, serif;
-  --body: "Manrope", system-ui, sans-serif;
+SITE_CSS = """:root {
+  --ink: #1a1a1a;
+  --muted: #666;
+  --line: #e8e6e3;
+  --paper: #faf9f7;
+  --white: #fff;
+  --display: "Cormorant Garamond", Georgia, serif;
+  --body: "Source Sans 3", system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -445,191 +454,246 @@ body {
   margin: 0;
   color: var(--ink);
   font-family: var(--body);
-  background:
-    radial-gradient(1200px 600px at 10% -10%, #c9d8cc 0%, transparent 55%),
-    radial-gradient(900px 500px at 100% 0%, #b7c9bc 0%, transparent 50%),
-    linear-gradient(180deg, #e5ece6 0%, var(--paper) 40%, #e8efe9 100%);
+  font-weight: 400;
+  background: var(--white);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
-.hero {
-  position: relative;
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: grid;
-  align-items: end;
-  color: var(--fog);
-  overflow: hidden;
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem clamp(1.25rem, 4vw, 2.5rem);
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
 }
-.hero-media {
+.site-header__brand {
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+}
+.site-header__nav a {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+.site-header__nav a:hover { color: var(--ink); }
+
+.hero-banner {
+  position: relative;
+  min-height: clamp(320px, 65vh, 620px);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--paper);
+}
+.hero-banner__media {
   position: absolute;
   inset: 0;
-  z-index: 0;
 }
-.hero-media img {
+.hero-banner__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transform: scale(1.04);
-  animation: rise 1.4s ease-out both;
 }
-.hero-media--empty {
-  background:
-    linear-gradient(135deg, #1f3d32, #314f42 45%, #5a6e5e);
-}
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(180deg, rgba(20,32,27,0.15) 0%, rgba(20,32,27,0.55) 55%, rgba(20,32,27,0.82) 100%);
-}
-.hero-copy {
+.hero-banner__copy {
   position: relative;
-  z-index: 2;
-  padding: clamp(1.5rem, 4vw, 3.5rem);
-  max-width: 40rem;
-  animation: fadeup 0.9s ease-out 0.2s both;
+  z-index: 1;
+  width: 100%;
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 4vw, 2.5rem);
+  background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.75) 40%, rgba(255,255,255,0.95) 100%);
 }
-.brand {
+.hero-banner__copy h1 {
   font-family: var(--display);
-  font-size: clamp(2.6rem, 8vw, 5.5rem);
-  font-weight: 700;
-  line-height: 0.95;
-  margin: 0 0 0.75rem;
-  letter-spacing: -0.02em;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0;
+  max-width: 36rem;
 }
-.hero h1 {
-  font-family: var(--body);
+.hero-banner__caption {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
   font-weight: 500;
-  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
-  line-height: 1.35;
-  margin: 0 0 0.75rem;
-  max-width: 28rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
-.support {
-  margin: 0 0 1.5rem;
-  opacity: 0.85;
-  font-size: 0.95rem;
-}
-.cta {
-  display: inline-block;
-  color: var(--ink);
-  background: var(--mist);
-  text-decoration: none;
-  padding: 0.75rem 1.2rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: transform 0.25s ease, background 0.25s ease;
-}
-.cta:hover { transform: translateY(-2px); background: #fff; }
 
-.lede {
+.intro {
   max-width: 42rem;
   margin: 0 auto;
-  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.25rem, 4vw, 2rem) 0;
+  padding: clamp(2rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2.5rem) 0;
+  text-align: center;
 }
-.lede p {
+.intro p {
   font-family: var(--display);
-  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
-  line-height: 1.4;
+  font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.55;
   margin: 0;
-  color: var(--moss);
+  color: var(--muted);
 }
 
-.gallery {
-  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1rem, 3vw, 2rem) 2rem;
+.portfolio {
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1rem, 3vw, 2rem) clamp(2.5rem, 5vw, 4rem);
+  background: var(--paper);
 }
-.gallery-head {
-  max-width: 40rem;
-  margin: 0 auto 2rem;
-}
-.gallery-head h2 {
-  font-family: var(--display);
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  margin: 0 0 0.4rem;
-}
-.gallery-head p {
-  margin: 0;
-  color: #3d5248;
-}
-
-.shots {
+.portfolio__grid {
   display: grid;
-  gap: clamp(2rem, 5vw, 3.5rem);
-  max-width: 1100px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+  max-width: 1280px;
   margin: 0 auto;
 }
-.shot {
-  margin: 0;
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+@media (min-width: 900px) {
+  .portfolio__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
-.shot.is-in {
+@media (min-width: 600px) and (max-width: 899px) {
+  .portfolio__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.artwork {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.artwork.is-in {
   opacity: 1;
   transform: none;
 }
-.shot img {
+.artwork__thumb {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+.artwork__thumb img {
   width: 100%;
   height: auto;
   display: block;
   vertical-align: middle;
-  box-shadow: 0 18px 50px var(--shadow);
+  transition: transform 0.35s ease, opacity 0.35s ease;
 }
-.shot figcaption {
-  padding: 1rem 0.15rem 0;
+.artwork__thumb:hover img {
+  transform: scale(1.03);
+  opacity: 0.92;
 }
-.shot h2 {
+.artwork__meta {
+  padding: 0.75rem 0.15rem 0;
+}
+.artwork__meta h2 {
   font-family: var(--display);
-  font-size: 1.35rem;
-  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
 }
-.shot p {
+.artwork__meta p {
   margin: 0;
-  color: #3d5248;
-  line-height: 1.5;
-}
-.empty {
-  text-align: center;
-  color: #3d5248;
-  padding: 3rem 1rem;
-}
-
-.foot {
-  padding: 2.5rem 1.25rem 3rem;
-  text-align: center;
-  color: #4b6156;
   font-size: 0.85rem;
-}
-.foot p { margin: 0; }
-
-@keyframes rise {
-  from { transform: scale(1.08); opacity: 0.6; }
-  to { transform: scale(1.04); opacity: 1; }
-}
-@keyframes fadeup {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: none; }
+  line-height: 1.45;
+  color: var(--muted);
 }
 
-@media (min-width: 900px) {
-  .shots {
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-  }
-  .shot:nth-child(even) {
-    margin-top: 3rem;
-  }
+.portfolio__empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--muted);
+  padding: 3rem 1rem;
+  font-size: 0.95rem;
 }
-""",
-        encoding="utf-8",
-    )
 
-    (assets / "site.js").write_text(
-        """const shots = document.querySelectorAll('.shot');
+.site-footer {
+  padding: 2rem clamp(1.25rem, 4vw, 2.5rem);
+  text-align: center;
+  border-top: 1px solid var(--line);
+  background: var(--white);
+}
+.site-footer p {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.88);
+}
+.lightbox[hidden] { display: none; }
+.lightbox__close {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  border: none;
+  background: none;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.8;
+  padding: 0.25rem;
+}
+.lightbox__close:hover { opacity: 1; }
+.lightbox__figure {
+  max-width: min(1100px, 100%);
+  max-height: 90vh;
+  margin: 0;
+}
+.lightbox__img {
+  max-width: 100%;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.lightbox__caption {
+  margin-top: 0.75rem;
+  text-align: center;
+  font-family: var(--display);
+  font-size: 1.1rem;
+  color: #fff;
+  opacity: 0.9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .artwork { opacity: 1; transform: none; transition: none; }
+  .artwork__thumb img { transition: none; }
+}
+"""
+
+SITE_JS = """const artworks = document.querySelectorAll('.artwork');
 if ('IntersectionObserver' in window) {
   const io = new IntersectionObserver((entries) => {
     for (const e of entries) {
@@ -638,14 +702,59 @@ if ('IntersectionObserver' in window) {
         io.unobserve(e.target);
       }
     }
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  shots.forEach((el) => io.observe(el));
+  }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+  artworks.forEach((el) => io.observe(el));
 } else {
-  shots.forEach((el) => el.classList.add('is-in'));
+  artworks.forEach((el) => el.classList.add('is-in'));
 }
-""",
-        encoding="utf-8",
-    )
+
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = lightbox && lightbox.querySelector('.lightbox__img');
+const lightboxCaption = lightbox && lightbox.querySelector('.lightbox__caption');
+const lightboxClose = lightbox && lightbox.querySelector('.lightbox__close');
+
+function openLightbox(src, caption) {
+  if (!lightbox || !lightboxImg) return;
+  lightboxImg.src = src;
+  lightboxImg.alt = caption || '';
+  if (lightboxCaption) lightboxCaption.textContent = caption || '';
+  lightbox.hidden = false;
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  if (!lightbox) return;
+  lightbox.hidden = true;
+  lightbox.setAttribute('aria-hidden', 'true');
+  if (lightboxImg) lightboxImg.src = '';
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('[data-lightbox]').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    openLightbox(btn.dataset.lightbox, btn.dataset.caption || '');
+  });
+});
+
+if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+if (lightbox) {
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && lightbox && !lightbox.hidden) closeLightbox();
+});
+"""
+
+
+def write_assets(out: Path) -> None:
+    assets = out / "assets"
+    assets.mkdir(parents=True, exist_ok=True)
+
+    (assets / "site.css").write_text(SITE_CSS, encoding="utf-8")
+    (assets / "site.js").write_text(SITE_JS, encoding="utf-8")
 
 
 def process_rows(cfg: dict, rows: list[dict]) -> list[dict]:
