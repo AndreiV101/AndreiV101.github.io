@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-08-01 23:18 UTC",
+  "built_at": "2026-08-01 23:28 UTC",
   "site_title": "Photo Journal",
   "site_tagline": "Stories and pictures from the field",
   "image_max_width": 1400,
@@ -50,31 +50,31 @@
     },
     {
       "title": "Draft Study",
-      "description": "Should not appear on the site.",
+      "description": "Night tree",
       "section": "gallery",
       "image_src": "images/draft-study-72632678.jpg"
     },
     {
       "title": "Draft Study",
-      "description": "Should not appear on the site.",
+      "description": "House in Ukraine",
       "section": "gallery",
       "image_src": "images/draft-study-05096388.jpg"
     },
     {
       "title": "Draft Study",
-      "description": "Should not appear on the site.",
+      "description": "Little Bog",
       "section": "gallery",
       "image_src": "images/draft-study-923fd026.jpg"
     },
     {
       "title": "Draft Study",
-      "description": "Should not appear on the site.",
+      "description": "The Path",
       "section": "gallery",
       "image_src": "images/draft-study-32e1df09.jpg"
     },
     {
       "title": "Draft Study",
-      "description": "Should not appear on the site.",
+      "description": "Sunlight path",
       "section": "gallery",
       "image_src": "images/draft-study-a8ba1c7a.jpg"
     },
