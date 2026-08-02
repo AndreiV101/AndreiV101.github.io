@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-08-02 00:18 UTC",
+  "built_at": "2026-08-02 04:09 UTC",
   "site_title": "Photo Journal",
   "site_tagline": "Stories and pictures from the field",
   "image_max_width": 1400,
@@ -55,52 +55,10 @@
       "image_src": "images/night-light-in-ukraine-72632678.jpg"
     },
     {
-      "title": "Blue Reflections",
-      "description": "",
-      "section": "gallery",
-      "image_src": "images/blue-reflections-eb429c58.jpg"
-    },
-    {
-      "title": "Chicago North Pond",
-      "description": "Chicago North Pond",
-      "section": "gallery",
-      "image_src": "images/chicago-north-pond-bbf1c8c0.jpg"
-    },
-    {
-      "title": "Driving down the road",
-      "description": "",
-      "section": "gallery",
-      "image_src": "images/driving-down-the-road-4d4e5628.jpg"
-    },
-    {
-      "title": "Forest sunset",
-      "description": "",
-      "section": "gallery",
-      "image_src": "images/forest-sunset-1f782cba.jpg"
-    },
-    {
-      "title": "Highschool project 1998",
-      "description": "Highschool project 1998",
-      "section": "gallery",
-      "image_src": "images/highschool-project-1998-b5739a0f.jpg"
-    },
-    {
       "title": "House in Ukraine",
       "description": "House in Ukraine",
       "section": "gallery",
       "image_src": "images/house-in-ukraine-05096388.jpg"
-    },
-    {
-      "title": "Lake sunset",
-      "description": "Lake sunset",
-      "section": "gallery",
-      "image_src": "images/lake-sunset-28177910.jpg"
-    },
-    {
-      "title": "Leaves at night",
-      "description": "",
-      "section": "gallery",
-      "image_src": "images/leaves-at-night-ca51e0a7.jpg"
     },
     {
       "title": "Little Bog",
@@ -109,64 +67,10 @@
       "image_src": "images/little-bog-923fd026.jpg"
     },
     {
-      "title": "Me painting at home.",
-      "description": "Me painting at home.",
+      "title": "The Path",
+      "description": "The Path",
       "section": "gallery",
-      "image_src": "images/me-painting-at-home-79cc84b6.jpg"
-    },
-    {
-      "title": "Mountain study",
-      "description": "",
-      "section": "gallery",
-      "image_src": "images/mountain-study-6ee6f53f.jpg"
-    },
-    {
-      "title": "Near the restaurant",
-      "description": "Near the restaurant",
-      "section": "gallery",
-      "image_src": "images/near-the-restaurant-e336fc3f.jpg"
-    },
-    {
-      "title": "Nightlights",
-      "description": "",
-      "section": "gallery",
-      "image_src": "images/nightlights-1836984a.jpg"
-    },
-    {
-      "title": "Parking Spot 2026",
-      "description": "",
-      "section": "gallery",
-      "image_src": "images/parking-spot-2026-e275d085.jpg"
-    },
-    {
-      "title": "Point of light",
-      "description": "",
-      "section": "gallery",
-      "image_src": "images/point-of-light-f8d37c78.jpg"
-    },
-    {
-      "title": "Purple Study",
-      "description": "Purple Study",
-      "section": "gallery",
-      "image_src": "images/purple-study-d8643df5.jpg"
-    },
-    {
-      "title": "Streamwood sunset",
-      "description": "Streamwood sunset",
-      "section": "gallery",
-      "image_src": "images/streamwood-sunset-606593fc.jpg"
-    },
-    {
-      "title": "Sun in Hyde Park",
-      "description": "Sun in Hyde Park",
-      "section": "gallery",
-      "image_src": "images/sun-in-hyde-park-8aae314b.jpg"
-    },
-    {
-      "title": "Sun in the forest",
-      "description": "",
-      "section": "gallery",
-      "image_src": "images/sun-in-the-forest-871890dd.jpg"
+      "image_src": "images/the-path-32e1df09.jpg"
     },
     {
       "title": "Sunlight path",
@@ -175,16 +79,64 @@
       "image_src": "images/sunlight-path-a8ba1c7a.jpg"
     },
     {
+      "title": "Sunny Tree shadow",
+      "description": "Sunny Tree shadow",
+      "section": "gallery",
+      "image_src": "images/sunny-tree-shadow-fe0081ed.jpg"
+    },
+    {
+      "title": "Near the restaurant",
+      "description": "Near the restaurant",
+      "section": "gallery",
+      "image_src": "images/near-the-restaurant-e336fc3f.jpg"
+    },
+    {
       "title": "Sunny Day",
       "description": "Sunny Day",
       "section": "gallery",
       "image_src": "images/sunny-day-9d6e8e2b.jpg"
     },
     {
-      "title": "Sunny Tree shadow",
-      "description": "Sunny Tree shadow",
+      "title": "Lake sunset",
+      "description": "Lake sunset",
       "section": "gallery",
-      "image_src": "images/sunny-tree-shadow-fe0081ed.jpg"
+      "image_src": "images/lake-sunset-28177910.jpg"
+    },
+    {
+      "title": "Chicago North Pond",
+      "description": "Chicago North Pond",
+      "section": "gallery",
+      "image_src": "images/chicago-north-pond-bbf1c8c0.jpg"
+    },
+    {
+      "title": "Streamwood sunset",
+      "description": "Streamwood sunset",
+      "section": "gallery",
+      "image_src": "images/streamwood-sunset-606593fc.jpg"
+    },
+    {
+      "title": "Highschool project 1998",
+      "description": "Highschool project 1998",
+      "section": "gallery",
+      "image_src": "images/highschool-project-1998-b5739a0f.jpg"
+    },
+    {
+      "title": "Sun in Hyde Park",
+      "description": "Sun in Hyde Park",
+      "section": "gallery",
+      "image_src": "images/sun-in-hyde-park-8aae314b.jpg"
+    },
+    {
+      "title": "Me painting at home.",
+      "description": "Me painting at home.",
+      "section": "gallery",
+      "image_src": "images/me-painting-at-home-79cc84b6.jpg"
+    },
+    {
+      "title": "Purple Study",
+      "description": "Purple Study",
+      "section": "gallery",
+      "image_src": "images/purple-study-d8643df5.jpg"
     },
     {
       "title": "Sunny path in the forest",
@@ -199,10 +151,16 @@
       "image_src": "images/sunny-path-in-the-forest-36bf15a4.jpg"
     },
     {
-      "title": "The Path",
-      "description": "The Path",
+      "title": "Waterfall 2001",
+      "description": "",
       "section": "gallery",
-      "image_src": "images/the-path-32e1df09.jpg"
+      "image_src": "images/waterfall-2001-5fadbe95.jpg"
+    },
+    {
+      "title": "Leaves at night",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/leaves-at-night-ca51e0a7.jpg"
     },
     {
       "title": "Unfinished Painting",
@@ -211,16 +169,58 @@
       "image_src": "images/unfinished-painting-6705cd71.jpg"
     },
     {
+      "title": "Point of light",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/point-of-light-f8d37c78.jpg"
+    },
+    {
+      "title": "Sun in the forest",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/sun-in-the-forest-871890dd.jpg"
+    },
+    {
+      "title": "Nightlights",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/nightlights-1836984a.jpg"
+    },
+    {
       "title": "Uninished Study",
       "description": "",
       "section": "gallery",
       "image_src": "images/uninished-study-1a8696f4.jpg"
     },
     {
-      "title": "Waterfall 2001",
+      "title": "Parking Spot 2026",
       "description": "",
       "section": "gallery",
-      "image_src": "images/waterfall-2001-5fadbe95.jpg"
+      "image_src": "images/parking-spot-2026-e275d085.jpg"
+    },
+    {
+      "title": "Blue Reflections",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/blue-reflections-eb429c58.jpg"
+    },
+    {
+      "title": "Mountain study",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/mountain-study-6ee6f53f.jpg"
+    },
+    {
+      "title": "Forest sunset",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/forest-sunset-1f782cba.jpg"
+    },
+    {
+      "title": "Driving down the road",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/driving-down-the-road-4d4e5628.jpg"
     }
   ]
 }
