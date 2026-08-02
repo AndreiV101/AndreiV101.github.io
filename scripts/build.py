@@ -446,6 +446,8 @@ def render_html(cfg: dict, items: list[dict], built_at: str) -> str:
   </footer>
   <div class="lightbox" id="lightbox" hidden aria-hidden="true">
     <button type="button" class="lightbox__close" aria-label="Close">&times;</button>
+    <button type="button" class="lightbox__nav lightbox__nav--prev" aria-label="Previous image" hidden>&lsaquo;</button>
+    <button type="button" class="lightbox__nav lightbox__nav--next" aria-label="Next image" hidden>&rsaquo;</button>
     <figure class="lightbox__figure">
       <img class="lightbox__img" src="" alt="">
       <figcaption class="lightbox__caption"></figcaption>
@@ -704,11 +706,41 @@ body {
   color: #fff;
   opacity: 0.9;
 }
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  border: none;
+  background: none;
+  color: #fff;
+  font-size: 2.5rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.7;
+  padding: 0.5rem;
+  min-width: 44px;
+  min-height: 44px;
+  transition: opacity 0.2s ease;
+}
+.lightbox__nav:hover,
+.lightbox__nav:focus-visible {
+  opacity: 1;
+  outline: none;
+}
+.lightbox__nav:focus-visible {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+}
+.lightbox__nav[hidden] { display: none; }
+.lightbox__nav--prev { left: 0.5rem; }
+.lightbox__nav--next { right: 0.5rem; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .artwork { opacity: 1; transform: none; transition: none; }
   .artwork__thumb img { transition: none; }
+  .lightbox__nav { transition: none; }
 }
 """
 
@@ -731,23 +763,58 @@ const lightbox = document.getElementById('lightbox');
 const lightboxImg = lightbox && lightbox.querySelector('.lightbox__img');
 const lightboxCaption = lightbox && lightbox.querySelector('.lightbox__caption');
 const lightboxClose = lightbox && lightbox.querySelector('.lightbox__close');
+const lightboxPrev = lightbox && lightbox.querySelector('.lightbox__nav--prev');
+const lightboxNext = lightbox && lightbox.querySelector('.lightbox__nav--next');
 
-function openLightbox(src, caption) {
-  if (!lightbox || !lightboxImg) return;
-  lightboxImg.src = src;
-  lightboxImg.alt = caption || '';
-  if (lightboxCaption) lightboxCaption.textContent = caption || '';
+const lightboxItems = [...document.querySelectorAll('[data-lightbox]')].map((btn) => ({
+  src: btn.dataset.lightbox,
+  caption: btn.dataset.caption || '',
+}));
+let lightboxIndex = -1;
+
+function updateLightboxNav() {
+  if (!lightboxPrev || !lightboxNext) return;
+  const hasPrev = lightboxIndex > 0;
+  const hasNext = lightboxIndex < lightboxItems.length - 1;
+  lightboxPrev.hidden = !hasPrev;
+  lightboxNext.hidden = !hasNext;
+}
+
+function showLightboxAt(index) {
+  if (!lightbox || !lightboxImg || index < 0 || index >= lightboxItems.length) return;
+  const item = lightboxItems[index];
+  lightboxIndex = index;
+  lightboxImg.src = item.src;
+  lightboxImg.alt = item.caption;
+  if (lightboxCaption) lightboxCaption.textContent = item.caption;
   lightbox.hidden = false;
   lightbox.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+  updateLightboxNav();
+}
+
+function openLightbox(src, caption) {
+  const index = lightboxItems.findIndex((i) => i.src === src);
+  showLightboxAt(index >= 0 ? index : 0);
 }
 
 function closeLightbox() {
   if (!lightbox) return;
   lightbox.hidden = true;
   lightbox.setAttribute('aria-hidden', 'true');
+  lightboxIndex = -1;
   if (lightboxImg) lightboxImg.src = '';
   document.body.style.overflow = '';
+  if (lightboxPrev) lightboxPrev.hidden = true;
+  if (lightboxNext) lightboxNext.hidden = true;
+}
+
+function goLightboxPrev() {
+  showLightboxAt(lightboxIndex - 1);
+}
+
+function goLightboxNext() {
+  showLightboxAt(lightboxIndex + 1);
 }
 
 document.querySelectorAll('[data-lightbox]').forEach((btn) => {
@@ -757,13 +824,46 @@ document.querySelectorAll('[data-lightbox]').forEach((btn) => {
 });
 
 if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+if (lightboxPrev) {
+  lightboxPrev.addEventListener('click', (e) => {
+    e.stopPropagation();
+    goLightboxPrev();
+  });
+}
+if (lightboxNext) {
+  lightboxNext.addEventListener('click', (e) => {
+    e.stopPropagation();
+    goLightboxNext();
+  });
+}
 if (lightbox) {
   lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox) closeLightbox();
   });
+
+  let touchStartX = 0;
+  lightbox.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  lightbox.addEventListener('touchend', (e) => {
+    if (lightbox.hidden) return;
+    const deltaX = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(deltaX) < 50) return;
+    if (deltaX > 0) goLightboxPrev();
+    else goLightboxNext();
+  }, { passive: true });
 }
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && lightbox && !lightbox.hidden) closeLightbox();
+  if (!lightbox || lightbox.hidden) return;
+  if (e.key === 'Escape') {
+    closeLightbox();
+  } else if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    goLightboxPrev();
+  } else if (e.key === 'ArrowRight') {
+    e.preventDefault();
+    goLightboxNext();
+  }
 });
 """
 
