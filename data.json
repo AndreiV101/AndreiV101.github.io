@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-08-01 23:31 UTC",
+  "built_at": "2026-08-02 00:18 UTC",
   "site_title": "Photo Journal",
   "site_tagline": "Stories and pictures from the field",
   "image_max_width": 1400,
@@ -7,46 +7,46 @@
   "count": 36,
   "items": [
     {
-      "title": "Golden Hour Cliffs",
-      "description": "Thick strokes of cadmium and violet catching the last light on the canyon rim.",
+      "title": "Welcome to my World of Art",
+      "description": "I'm a physician and an Artist. Landscapes of forests and Trees fascinate me.",
       "section": "featured",
-      "image_src": "images/golden-hour-cliffs-fdd1903f.jpg"
+      "image_src": "images/welcome-to-my-world-of-art-fdd1903f.jpg"
     },
     {
-      "title": "Morning Market",
-      "description": "Vendors setting up before sunrise. Tomatoes stacked in wooden crates.",
+      "title": "Sunny Landscape",
+      "description": "The tree is facing the sun",
       "section": "gallery",
-      "image_src": "images/morning-market-2f87c060.jpg"
+      "image_src": "images/sunny-landscape-2f87c060.jpg"
     },
     {
-      "title": "River Walk",
-      "description": "Fog lifting off the water after rain, willows leaning into the current.",
+      "title": "Mother with Child",
+      "description": "Mother and baby enjoying the sunny day",
       "section": "gallery",
-      "image_src": "images/river-walk-bee395e8.jpg"
+      "image_src": "images/mother-with-child-bee395e8.jpg"
     },
     {
-      "title": "Studio Light",
-      "description": "Work in progress on the long table \u2014 five pigments, clean strokes, right the first time.",
+      "title": "In the forest",
+      "description": "Forest of color",
       "section": "gallery",
-      "image_src": "images/studio-light-748c5d71.jpg"
+      "image_src": "images/in-the-forest-748c5d71.jpg"
     },
     {
-      "title": "Wine Country Hills",
-      "description": "Rolling vineyards in late summer, oak shadows cutting across the rows.",
+      "title": "Hyde Park",
+      "description": "Not far from the beach is the hyde park",
       "section": "gallery",
-      "image_src": "images/wine-country-hills-6630a1a7.jpg"
+      "image_src": "images/hyde-park-6630a1a7.jpg"
     },
     {
-      "title": "Desert Bloom",
-      "description": "Unexpected color after spring rain \u2014 sage, sand, and sudden wildflowers.",
+      "title": "Blue Reflections",
+      "description": "Shadows are beautiful",
       "section": "gallery",
-      "image_src": "images/desert-bloom-e9cc356a.jpg"
+      "image_src": "images/blue-reflections-e9cc356a.jpg"
     },
     {
-      "title": "Harbor Dusk",
-      "description": "Boats at rest while the sky turns from coral to indigo.",
+      "title": "Sun rays in the forest",
+      "description": "Sun is in the forest",
       "section": "gallery",
-      "image_src": "images/harbor-dusk-199f9ede.jpg"
+      "image_src": "images/sun-rays-in-the-forest-199f9ede.jpg"
     },
     {
       "title": "Night Light in Ukraine",
@@ -55,82 +55,28 @@
       "image_src": "images/night-light-in-ukraine-72632678.jpg"
     },
     {
+      "title": "Blue Reflections",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/blue-reflections-eb429c58.jpg"
+    },
+    {
       "title": "Chicago North Pond",
       "description": "Chicago North Pond",
       "section": "gallery",
       "image_src": "images/chicago-north-pond-bbf1c8c0.jpg"
     },
     {
-      "title": "Draft Study",
-      "description": "Should not appear on the site.",
+      "title": "Driving down the road",
+      "description": "",
       "section": "gallery",
-      "image_src": "images/draft-study-5fadbe95.jpg"
+      "image_src": "images/driving-down-the-road-4d4e5628.jpg"
     },
     {
-      "title": "Draft Study",
-      "description": "Should not appear on the site.",
+      "title": "Forest sunset",
+      "description": "",
       "section": "gallery",
-      "image_src": "images/draft-study-ca51e0a7.jpg"
-    },
-    {
-      "title": "Draft Study",
-      "description": "Should not appear on the site.",
-      "section": "gallery",
-      "image_src": "images/draft-study-6705cd71.jpg"
-    },
-    {
-      "title": "Draft Study",
-      "description": "Should not appear on the site.",
-      "section": "gallery",
-      "image_src": "images/draft-study-f8d37c78.jpg"
-    },
-    {
-      "title": "Draft Study",
-      "description": "Should not appear on the site.",
-      "section": "gallery",
-      "image_src": "images/draft-study-871890dd.jpg"
-    },
-    {
-      "title": "Draft Study",
-      "description": "Should not appear on the site.",
-      "section": "gallery",
-      "image_src": "images/draft-study-1836984a.jpg"
-    },
-    {
-      "title": "Draft Study",
-      "description": "Should not appear on the site.",
-      "section": "gallery",
-      "image_src": "images/draft-study-1a8696f4.jpg"
-    },
-    {
-      "title": "Draft Study",
-      "description": "Should not appear on the site.",
-      "section": "gallery",
-      "image_src": "images/draft-study-e275d085.jpg"
-    },
-    {
-      "title": "Draft Study",
-      "description": "Should not appear on the site.",
-      "section": "gallery",
-      "image_src": "images/draft-study-eb429c58.jpg"
-    },
-    {
-      "title": "Draft Study",
-      "description": "Should not appear on the site.",
-      "section": "gallery",
-      "image_src": "images/draft-study-6ee6f53f.jpg"
-    },
-    {
-      "title": "Draft Study",
-      "description": "Should not appear on the site.",
-      "section": "gallery",
-      "image_src": "images/draft-study-1f782cba.jpg"
-    },
-    {
-      "title": "Draft Study",
-      "description": "Should not appear on the site.",
-      "section": "gallery",
-      "image_src": "images/draft-study-4d4e5628.jpg"
+      "image_src": "images/forest-sunset-1f782cba.jpg"
     },
     {
       "title": "Highschool project 1998",
@@ -151,6 +97,12 @@
       "image_src": "images/lake-sunset-28177910.jpg"
     },
     {
+      "title": "Leaves at night",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/leaves-at-night-ca51e0a7.jpg"
+    },
+    {
       "title": "Little Bog",
       "description": "Little Bog",
       "section": "gallery",
@@ -163,10 +115,34 @@
       "image_src": "images/me-painting-at-home-79cc84b6.jpg"
     },
     {
+      "title": "Mountain study",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/mountain-study-6ee6f53f.jpg"
+    },
+    {
       "title": "Near the restaurant",
       "description": "Near the restaurant",
       "section": "gallery",
       "image_src": "images/near-the-restaurant-e336fc3f.jpg"
+    },
+    {
+      "title": "Nightlights",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/nightlights-1836984a.jpg"
+    },
+    {
+      "title": "Parking Spot 2026",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/parking-spot-2026-e275d085.jpg"
+    },
+    {
+      "title": "Point of light",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/point-of-light-f8d37c78.jpg"
     },
     {
       "title": "Purple Study",
@@ -185,6 +161,12 @@
       "description": "Sun in Hyde Park",
       "section": "gallery",
       "image_src": "images/sun-in-hyde-park-8aae314b.jpg"
+    },
+    {
+      "title": "Sun in the forest",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/sun-in-the-forest-871890dd.jpg"
     },
     {
       "title": "Sunlight path",
@@ -221,6 +203,24 @@
       "description": "The Path",
       "section": "gallery",
       "image_src": "images/the-path-32e1df09.jpg"
+    },
+    {
+      "title": "Unfinished Painting",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/unfinished-painting-6705cd71.jpg"
+    },
+    {
+      "title": "Uninished Study",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/uninished-study-1a8696f4.jpg"
+    },
+    {
+      "title": "Waterfall 2001",
+      "description": "",
+      "section": "gallery",
+      "image_src": "images/waterfall-2001-5fadbe95.jpg"
     }
   ]
 }
